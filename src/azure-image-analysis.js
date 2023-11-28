@@ -3,7 +3,7 @@ import axios from "axios";
 
 const analyzeImage = async (imageUrl) => {
   const response = await axios.post(
-    "https://eastus.api.cognitive.microsoft.com/vision/v4.0/analyze",
+    "https://gitchallenge.cognitiveservices.azure.com/vision/v3.2/analyze",
     {
       url: imageUrl,
     },

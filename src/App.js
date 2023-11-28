@@ -1,15 +1,32 @@
 import React, { useState } from "react";
 import "./App.css";
+import analyzeImage from "./azure-image-analysis";
 
 function App() {
   const [imageUrl, setImageUrl] = useState("");
+  const [analysisResults, setAnalysisResults] = useState(null);
 
-  const handleImageAnalysis = () => {
-    // Aquí irá el código para analizar la imagen
+  const handleImageAnalysis = async () => {
+    const results = await analyzeImage(imageUrl);
+    setAnalysisResults(results);
   };
 
   const handleImageGeneration = () => {
     // Aquí irá el código para generar la imagen
+    console.log("Generando la imagen...");
+  };
+
+  const DisplayResults = () => {
+    if (!analysisResults) {
+      return null;
+    }
+
+    return (
+      <div>
+        <img src={imageUrl} alt="Analyzed" />
+        <pre>{JSON.stringify(analysisResults, null, 2)}</pre>
+      </div>
+    );
   };
 
   return (
@@ -30,6 +47,7 @@ function App() {
           Generate
         </button>
       </div>
+      <DisplayResults />
     </div>
   );
 }
